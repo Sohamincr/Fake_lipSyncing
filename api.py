@@ -32,7 +32,7 @@ def lip_sync_detection(audio_file,video_file):
             correlation = evaluate_correlation(landmarks, audio_features)
 
             # Make decision based on correlation measure
-            if correlation > 395:
+            if correlation > 600:
                 decision = "Fake"
             else:
                 decision = "Genuine"
