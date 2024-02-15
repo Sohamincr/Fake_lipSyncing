@@ -4,7 +4,6 @@ import numpy as np
 import dlib
 import librosa
 
-app = Flask(__name__)
 
 # Load facial landmark detector
 detector = dlib.get_frontal_face_detector()
@@ -45,53 +44,53 @@ def evaluate_correlation(landmarks, audio_features):
     correlation_measure = np.abs(avg_landmark_y - avg_mfccs_mean)
     return correlation_measure
 
-#@app.route('/', methods=['GET'])
+# #@app.route('/', methods=['GET'])
 
 
-#@app.route('/lip_sync_detection', methods=['POST'])
-def lip_sync_detection(audio_file,video_file):
+# #@app.route('/lip_sync_detection', methods=['POST'])
+# def lip_sync_detection(audio_file,video_file):
 
-    # Extract audio features
-    audio_features = extract_audio_features(audio_file)
+#     # Extract audio features
+#     audio_features = extract_audio_features(audio_file)
 
-    # Process video frames
-    video_capture = cv2.VideoCapture(video_file)
-    response = []
+#     # Process video frames
+#     video_capture = cv2.VideoCapture(video_file)
+#     response = []
 
-    while True:
-        ret, frame = video_capture.read()
-        if not ret:
-            break
+#     while True:
+#         ret, frame = video_capture.read()
+#         if not ret:
+#             break
 
-        # Detect lip landmarks in each frame
-        landmarks = detect_lip_landmarks(frame)
+#         # Detect lip landmarks in each frame
+#         landmarks = detect_lip_landmarks(frame)
 
-        if landmarks is not None:
-            # Evaluate correlation between facial landmarks and audio features
-            correlation = evaluate_correlation(landmarks, audio_features)
+#         if landmarks is not None:
+#             # Evaluate correlation between facial landmarks and audio features
+#             correlation = evaluate_correlation(landmarks, audio_features)
 
-            # Make decision based on correlation measure
-            if correlation > 395:
-                decision = "Fake"
-            else:
-                decision = "Genuine"
-            print(decision)
-            response.append({"frame": frame, "decision": decision})
+#             # Make decision based on correlation measure
+#             if correlation > 395:
+#                 decision = "Fake"
+#             else:
+#                 decision = "Genuine"
+#             print(decision)
+#             response.append({"frame": frame, "decision": decision})
 
-    # Release resources
-    video_capture.release()
+#     # Release resources
+#     video_capture.release()
 
-    return jsonify(response)
+#     return jsonify(response)
 
 
 
- # Receive files from request
-audio_file = "output_audio20.mp3"
-video_file = "Rec-65b4d436e01621cac2c1e718-1706349719530.mp4"
+#  # Receive files from request
+# audio_file = "output_audio20.mp3"
+# video_file = "Rec-65b4d436e01621cac2c1e718-1706349719530.mp4"
 
-output = lip_sync_detection(audio_file,video_file)
+# output = lip_sync_detection(audio_file,video_file)
 
-print(output)
+# print(output)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
